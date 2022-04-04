@@ -1,4 +1,6 @@
 const output = document.querySelector('.result');
+const reset = document.querySelector('.clear');
+const percentage = document.querySelector('.percent');
 
 const nums = {
     1: document.getElementById('one'),
@@ -21,8 +23,13 @@ const nums = {
 
 output.textContent = 0;
 
+
 for (let num in nums) {
     nums[num].addEventListener('click', () => {
         output.textContent = nums[num].textContent;
     });
 }
+
+reset.addEventListener('click', () => { output.textContent = 0})
+
+percentage.addEventListener('click', () => { output.textContent = Number(output.textContent)/100})
