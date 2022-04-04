@@ -106,7 +106,7 @@ body {
     background-color: black;
 }
 
-.zero {
+#zero {
     grid-column: 1 / 3;
     display: flex;
     justify-content: center;
