@@ -5,7 +5,6 @@ const decimal = document.querySelector('.decimal');
 let first = [];
 let second = [];
 let operation = [];
-let percent = '';
 
 const nums = {
     1: document.getElementById('one'),
@@ -29,17 +28,17 @@ const operators = {
 
 /* max output length: 14 */
 
-output.textContent = 0;
-
-
 for (let num in nums) {
     nums[num].addEventListener('click', () => {
+        let localeNumber;
         if (operation.length == 0){
         first.push(nums[num].textContent);
-        output.textContent = first.join('');
+        localeNumber = Number(first.join('')).toLocaleString('en-US');
+        output.textContent = localeNumber;
         } else {
             second.push(nums[num].textContent);
-            output.textContent = second.join('');
+            localeNumber = Number(second.join('')).toLocaleString('en-US');
+            output.textContent = localeNumber;
         };
     });
 }
@@ -54,7 +53,7 @@ for (let ops in operators) {
             operation.push(operators[ops].textContent);
             output.textContent = operation;
         };
-    })
+    });
 }
 
 reset.addEventListener('click', () => { 
@@ -62,14 +61,15 @@ reset.addEventListener('click', () => {
     first.length = 0;
     operation.length = 0;
     second.length = 0;
-
 })
 
 percentage.addEventListener('click', () => {
-    percent = first.join('');
+    let localeNumber;
+    let percent = first.join('');
     first.length = 0;
     first.push(percent/100);
-    output.textContent = first;
+    localeNumber = Number(first).toLocaleString('en-US');
+    output.textContent = localeNumber;
 })
 
 decimal.addEventListener('click', () => {
