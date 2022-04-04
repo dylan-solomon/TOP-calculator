@@ -2,8 +2,9 @@ const output = document.querySelector('.result');
 const reset = document.querySelector('.clear');
 const percentage = document.querySelector('.percent');
 const decimal = document.querySelector('.decimal');
-let first = '';
-let second = '';
+let first = [];
+let second = [];
+let operation = [];
 
 const nums = {
     1: document.getElementById('one'),
@@ -19,7 +20,7 @@ const nums = {
 }
 
 const operators = {
-    'mulitply': document.querySelector('.multiply'),
+    'multiply': document.querySelector('.multiply'),
     'add': document.querySelector('.plus'),
     'subtract': document.querySelector('.subtract'),
     'divide': document.querySelector('.divide'),
@@ -32,17 +33,41 @@ output.textContent = 0;
 
 for (let num in nums) {
     nums[num].addEventListener('click', () => {
-        output.textContent = nums[num].textContent;
+        if (operation.length = 0){
+        first.push(nums[num].textContent);
+        output.textContent = first.join('');
+        } else {
+            second.push(nums[num].textContent);
+            output.textContent = second.join('');
+        };
     });
-    
 }
 
-reset.addEventListener('click', () => { output.textContent = 0})
+for (let ops in operators) {
+    operators[ops].addEventListener('click', () => {
+        if (operation.length = 0) {
+            operation.push(operators[ops].textContent);
+            output.textContent = operation;
+        } else {
+            operation.length = 0;
+            operation.push(operators[ops].textContent);
+            output.textContent = operation;
+        };
+    })
+}
+
+reset.addEventListener('click', () => { 
+    output.textContent = 0;
+    first.length = 0;
+    operation.length = 0;
+    second.length = 0;
+
+})
 
 percentage.addEventListener('click', () => { output.textContent = Number(output.textContent)/100})
 
 decimal.addEventListener('click', () => {
-    if (output.textContent[0] == 0 && output.textContent[1] != '.') {
+    if (output.textContent[0] == 0 && output.textContent[1] != '.' && operation.length == 0) {
         output.textContent += decimal.textContent;
     } 
 })
