@@ -5,6 +5,7 @@ const decimal = document.querySelector('.decimal');
 let first = [];
 let second = [];
 let operation = [];
+let percent = '';
 
 const nums = {
     1: document.getElementById('one'),
@@ -33,7 +34,7 @@ output.textContent = 0;
 
 for (let num in nums) {
     nums[num].addEventListener('click', () => {
-        if (operation.length = 0){
+        if (operation.length == 0){
         first.push(nums[num].textContent);
         output.textContent = first.join('');
         } else {
@@ -45,7 +46,7 @@ for (let num in nums) {
 
 for (let ops in operators) {
     operators[ops].addEventListener('click', () => {
-        if (operation.length = 0) {
+        if (operation.length == 0) {
             operation.push(operators[ops].textContent);
             output.textContent = operation;
         } else {
@@ -64,7 +65,12 @@ reset.addEventListener('click', () => {
 
 })
 
-percentage.addEventListener('click', () => { output.textContent = Number(output.textContent)/100})
+percentage.addEventListener('click', () => {
+    percent = first.join('');
+    first.length = 0;
+    first.push(percent/100);
+    output.textContent = first;
+})
 
 decimal.addEventListener('click', () => {
     if (output.textContent[0] == 0 && output.textContent[1] != '.' && operation.length == 0) {
