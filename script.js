@@ -1,6 +1,9 @@
 const output = document.querySelector('.result');
 const reset = document.querySelector('.clear');
 const percentage = document.querySelector('.percent');
+const decimal = document.querySelector('.decimal');
+let first = '';
+let second = '';
 
 const nums = {
     1: document.getElementById('one'),
@@ -13,6 +16,9 @@ const nums = {
     8: document.getElementById('eight'),
     9: document.getElementById('nine'),
     0: document.getElementById('zero'),
+}
+
+const operators = {
     'mulitply': document.querySelector('.multiply'),
     'add': document.querySelector('.plus'),
     'subtract': document.querySelector('.subtract'),
@@ -28,8 +34,15 @@ for (let num in nums) {
     nums[num].addEventListener('click', () => {
         output.textContent = nums[num].textContent;
     });
+    
 }
 
 reset.addEventListener('click', () => { output.textContent = 0})
 
 percentage.addEventListener('click', () => { output.textContent = Number(output.textContent)/100})
+
+decimal.addEventListener('click', () => {
+    if (output.textContent[0] == 0 && output.textContent[1] != '.') {
+        output.textContent += decimal.textContent;
+    } 
+})
