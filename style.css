@@ -1,0 +1,119 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    font-size: 1.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: #2B2B2B;
+    color: white;
+    text-align: center;
+    height: 500px;
+    width: 375px;
+}
+
+.clear,
+.percent,
+.divide,
+.seven,
+.eight,
+.nine,
+.multiply,
+.four,
+.five,
+.six,
+.subtract,
+.one,
+.two,
+.three,
+.plus,
+.zero,
+.decimal,
+.equals {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #414141;
+}
+
+.clear:hover,
+.percent:hover,
+.divide:hover,
+.seven:hover,
+.eight:hover,
+.nine:hover,
+.multiply:hover,
+.four:hover,
+.five:hover,
+.six:hover,
+.subtract:hover,
+.one:hover,
+.two:hover,
+.three:hover,
+.plus:hover,
+.zero:hover,
+.decimal:hover,
+.equals:hover {
+    cursor: pointer;
+}
+
+.clear:hover,
+.seven:hover,
+.eight:hover,
+.nine:hover,
+.four:hover,
+.five:hover,
+.six:hover,
+.one:hover,
+.two:hover,
+.three:hover,
+.zero:hover,
+.decimal:hover {
+    background-color: rgba(88, 88, 88, 0.75);
+}
+
+.operator:hover {
+    background-color: rgba(220, 140, 0, 0.7);
+}
+
+
+.result {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 3rem;
+    grid-column: 1 / 5;
+    padding-right: 1rem;
+}
+
+.clear {
+    grid-column: 1 / 3;
+}
+
+.percent {
+    background-color: black;
+}
+
+.zero {
+    grid-column: 1 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.operator {
+    background-color: rgb(220, 140, 0);
+    font-weight: lighter;
+}
