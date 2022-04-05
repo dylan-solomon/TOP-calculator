@@ -2,6 +2,7 @@ const output = document.querySelector('.result');
 const reset = document.querySelector('.clear');
 const percentage = document.querySelector('.percent');
 const decimal = document.querySelector('.decimal');
+const solve = document.querySelector('.equals');
 let first = [];
 let second = [];
 let operation = [];
@@ -45,15 +46,9 @@ for (let num in nums) {
 
 for (let ops in operators) {
     operators[ops].addEventListener('click', () => {
-        if (operation.length == 0) {
-            operation.push(operators[ops].textContent);
-            output.textContent = operation;
-        } else {
-            operation.length = 0;
-            operation.push(operators[ops].textContent);
-            output.textContent = operation;
-        };
-    });
+        operation.push(operators[ops].textContent);
+        output.textContent = operation;
+    })
 }
 
 reset.addEventListener('click', () => { 
@@ -73,7 +68,69 @@ percentage.addEventListener('click', () => {
 })
 
 decimal.addEventListener('click', () => {
+    let localeNumber;
     if (output.textContent[0] == 0 && output.textContent[1] != '.' && operation.length == 0) {
-        output.textContent += decimal.textContent;
-    } 
+        output.textContent = '0' + `${decimal.textContent}`;
+        first.push(0, '.')
+    } else if (first.length> 0 && !first.includes('.') && operation.length == 0) {
+        first.push(decimal.textContent);
+        localeNumber = first.join('').toLocaleString('en-US');
+        output.textContent = localeNumber;
+    }
+})
+
+function multiply(a,b){
+    if (b.length>0) {
+        let result = Number(a.join('')) * Number(b.join(''));
+        second.length = 0;
+        first.length = 0;
+        first.push('result');
+        operation.length = 0;
+        output.textContent = result;
+    };
+}
+
+function subtract(a,b){
+    if (b.length>0) {
+        let result = Number(a.join('')) - Number(b.join(''));
+        second.length = 0;
+        first.length = 0;
+        first.push(result);
+        operation.length = 0;
+        output.textContent = result;
+    };
+}
+
+function divide(a,b){
+    if (b.length>0) {
+        let result = Number(a.join('')) / Number(b.join(''));
+        second.length = 0;
+        first.length = 0;
+        first.push(result)
+        operation.length = 0;
+        output.textContent = result;
+    };
+}
+
+function add(a,b){
+    if (b.length>0) {
+        let result = Number(a.join('')) + Number(b.join(''));
+        second.length = 0;
+        first.length = 0;
+        operation.length = 0;
+        first.push(result);
+        output.textContent = result;
+    };
+}
+
+solve.addEventListener('click', () => {
+    if (operation.includes('x')) {
+        multiply(first, second);
+    } else if (operation.includes('-')) {
+        subtract(first,second);
+    } else if (operation.includes('+')) {
+        add(first,second);
+    } else if (operation.includes('÷')) {
+        divide(first,second);
+    };
 })
