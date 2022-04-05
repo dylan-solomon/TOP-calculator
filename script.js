@@ -52,6 +52,7 @@ for (let num in nums) {
 for (let ops in operators) {
     operators[ops].addEventListener('click', () => {
         operation.length = 0;
+        second.length = 0;
         operation.push(operators[ops].textContent);
         output.textContent = operation;
     });
