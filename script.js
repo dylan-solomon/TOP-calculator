@@ -61,6 +61,8 @@ for (let ops in operators) {
     });
 }
 
+/* CLEAR BUTTON */
+
 reset.addEventListener('click', () => { 
     output.textContent = 0;
     if (second.length>0) {
@@ -73,6 +75,8 @@ reset.addEventListener('click', () => {
     };
 })
 
+/* PERCENT BUTTON */
+
 percentage.addEventListener('click', () => {
     let localeNumber;
     let percent = first.join('');
@@ -81,6 +85,8 @@ percentage.addEventListener('click', () => {
     localeNumber = Number(first).toLocaleString('en-US', myLocale);
     output.textContent = localeNumber;
 })
+
+/* DECIMAL BUTTON */
 
 decimal.addEventListener('click', () => {
     let localeNumber;
@@ -91,8 +97,14 @@ decimal.addEventListener('click', () => {
         first.push(decimal.textContent);
         localeNumber = first.join('').toLocaleString('en-US', myLocale);
         output.textContent = localeNumber;
-    }
+    };
 })
+
+/* EQUALS BUTTON */
+
+solve.addEventListener('click', doMath);
+
+/* MATH OPERATIONS */
 
 function multiply(a,b){
     if (b.length>0) {
@@ -134,7 +146,7 @@ function add(a,b){
     };
 }
 
-solve.addEventListener('click', doMath)
+/* DO THE MATH FUNCTION */
 
 function doMath() {
     if (operation.includes('x')) {
