@@ -30,21 +30,19 @@ const operators = {
 const myLocale = {
     maximumFractionDigits: '7',
     minimumFractionDigits: '2',
-    maximumSignificantDigits: '10',
+    maximumSignificantDigits: '11',
 }
-
-/* max output length: 14 */
 
 for (let num in nums) {
     nums[num].addEventListener('click', () => {
         let localeNumber;
         if (operation.length == 0){
             reset.textContent = 'C'
-        first.push(nums[num].textContent);
-        localeNumber = Number(first.join('')).toLocaleString('en-US', myLocale);
-        output.textContent = localeNumber;
+            sizeLimit(first.push(nums[num].textContent));
+            localeNumber = Number(first.join('')).toLocaleString('en-US', myLocale);
+            output.textContent = localeNumber;
         } else {
-            second.push(nums[num].textContent);
+            sizeLimit(second.push(nums[num].textContent));
             localeNumber = Number(second.join('')).toLocaleString('en-US', myLocale);
             output.textContent = localeNumber;
         };
@@ -89,19 +87,19 @@ percentage.addEventListener('click', () => {
 decimal.addEventListener('click', () => {
     let localeNumber;
     if (output.textContent[0] == 0 && output.textContent[1] != decimal.textContent && operation.length == 0) {
-        first.push(0, '.')
+        first.push(0, '.');
         output.textContent = first.join('');
-
     } else if (first.length> 0 && !first.includes('.') && operation.length == 0) {
-        first.push(decimal.textContent);
+        sizeLimit(first.push(decimal.textContent));
         localeNumber = first.join('').toLocaleString('en-US', myLocale);
         output.textContent = localeNumber;
     } else if (first.length> 0 && second.length == 0) {
         second.push(decimal.textContent);
         output.textContent = `0` + `${decimal.textContent}`;
     } else if (second.length > 0 && !second.includes('.')) {
-        second.push(decimal.textContent);
-        output.textContent = second.join('');
+        sizeLimit(second.push(decimal.textContent));
+        localeNumber = second.join('').toLocaleString('en-US', myLocale);
+        output.textContent = localeNumber;
     };
 })
 
@@ -163,4 +161,15 @@ function doMath() {
     } else if (operation.includes('÷')) {
         divide(first,second);
     }
-}    
+}   
+
+function sizeLimit (count) {
+    if (first.length > 9 && second.length > 9) {
+        first.length = 9;
+        second.length = 9;
+    } else if (first.length > 9) {
+        first.length = 9;
+    } else if (second.length > 9) {
+        second.length = 9;
+    }
+}
