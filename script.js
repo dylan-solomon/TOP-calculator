@@ -27,6 +27,12 @@ const operators = {
     'divide': document.querySelector('.divide'),
 }
 
+const myLocale = {
+    maximumFractionDigits: '7',
+    minimumFractionDigits: '2',
+    maximumSignificantDigits: '10',
+}
+
 /* max output length: 14 */
 
 for (let num in nums) {
@@ -34,11 +40,11 @@ for (let num in nums) {
         let localeNumber;
         if (operation.length == 0){
         first.push(nums[num].textContent);
-        localeNumber = Number(first.join('')).toLocaleString('en-US');
+        localeNumber = Number(first.join('')).toLocaleString('en-US', myLocale);
         output.textContent = localeNumber;
         } else {
             second.push(nums[num].textContent);
-            localeNumber = Number(second.join('')).toLocaleString('en-US');
+            localeNumber = Number(second.join('')).toLocaleString('en-US', myLocale);
             output.textContent = localeNumber;
         };
         if(first.length>0){
@@ -52,9 +58,8 @@ for (let ops in operators) {
         operation.length = 0;
         operation.push(operators[ops].textContent);
         output.textContent = operation;
-    })
+    });
 }
-
 
 reset.addEventListener('click', () => { 
     output.textContent = 0;
@@ -73,7 +78,7 @@ percentage.addEventListener('click', () => {
     let percent = first.join('');
     first.length = 0;
     first.push(percent/100);
-    localeNumber = Number(first).toLocaleString('en-US');
+    localeNumber = Number(first).toLocaleString('en-US', myLocale);
     output.textContent = localeNumber;
 })
 
@@ -84,7 +89,7 @@ decimal.addEventListener('click', () => {
         first.push(0, '.')
     } else if (first.length> 0 && !first.includes('.') && operation.length == 0) {
         first.push(decimal.textContent);
-        localeNumber = first.join('').toLocaleString('en-US');
+        localeNumber = first.join('').toLocaleString('en-US', myLocale);
         output.textContent = localeNumber;
     }
 })
@@ -94,8 +99,8 @@ function multiply(a,b){
         let result = Number(a.join('')) * Number(b.join(''));
         second.length = 0;
         first.length = 0;
-        first.push('result');
-        output.textContent = result;
+        first.push(result);
+        output.textContent = result.toLocaleString('en-US', myLocale);
     };
 }
 
@@ -105,7 +110,7 @@ function subtract(a,b){
         second.length = 0;
         first.length = 0;
         first.push(result);
-        output.textContent = result;
+        output.textContent = result.toLocaleString('en-US', myLocale);
     };
 }
 
@@ -115,7 +120,7 @@ function divide(a,b){
         second.length = 0;
         first.length = 0;
         first.push(result)
-        output.textContent = result;
+        output.textContent = result.toLocaleString('en-US', myLocale);
     };
 }
 
@@ -125,11 +130,13 @@ function add(a,b){
         second.length = 0;
         first.length = 0;
         first.push(result);
-        output.textContent = result;
+        output.textContent = result.toLocaleString('en-US', myLocale);
     };
 }
 
-solve.addEventListener('click', () => {
+solve.addEventListener('click', doMath)
+
+function doMath() {
     if (operation.includes('x')) {
         multiply(first, second);
     } else if (operation.includes('-')) {
@@ -138,5 +145,5 @@ solve.addEventListener('click', () => {
         add(first,second);
     } else if (operation.includes('÷')) {
         divide(first,second);
-    };
-})
+    }
+}    
