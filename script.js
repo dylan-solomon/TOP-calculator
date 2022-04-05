@@ -39,6 +39,7 @@ for (let num in nums) {
     nums[num].addEventListener('click', () => {
         let localeNumber;
         if (operation.length == 0){
+            reset.textContent = 'C'
         first.push(nums[num].textContent);
         localeNumber = Number(first.join('')).toLocaleString('en-US', myLocale);
         output.textContent = localeNumber;
@@ -47,9 +48,6 @@ for (let num in nums) {
             localeNumber = Number(second.join('')).toLocaleString('en-US', myLocale);
             output.textContent = localeNumber;
         };
-        if(first.length>0){
-            reset.textContent = 'C';
-        }
     });
 }
 
@@ -90,13 +88,20 @@ percentage.addEventListener('click', () => {
 
 decimal.addEventListener('click', () => {
     let localeNumber;
-    if (output.textContent[0] == 0 && output.textContent[1] != '.' && operation.length == 0) {
-        output.textContent = '0' + `${decimal.textContent}`;
+    if (output.textContent[0] == 0 && output.textContent[1] != decimal.textContent && operation.length == 0) {
         first.push(0, '.')
+        output.textContent = first.join('');
+
     } else if (first.length> 0 && !first.includes('.') && operation.length == 0) {
         first.push(decimal.textContent);
         localeNumber = first.join('').toLocaleString('en-US', myLocale);
         output.textContent = localeNumber;
+    } else if (first.length> 0 && second.length == 0) {
+        second.push(decimal.textContent);
+        output.textContent = `0` + `${decimal.textContent}`;
+    } else if (second.length > 0 && !second.includes('.')) {
+        second.push(decimal.textContent);
+        output.textContent = second.join('');
     };
 })
 
