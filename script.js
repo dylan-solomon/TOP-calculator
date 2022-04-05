@@ -132,11 +132,15 @@ function subtract(a,b){
 
 function divide(a,b){
     if (b.length>0) {
+        if (b == 0) {
+            output.textContent = 'Error'
+        } else {
         let result = Number(a.join('')) / Number(b.join(''));
         second.length = 0;
         first.length = 0;
         first.push(result)
         output.textContent = result.toLocaleString('en-US', myLocale);
+        }
     };
 }
 
@@ -165,12 +169,12 @@ function doMath() {
 }   
 
 function sizeLimit (count) {
-    if (first.length > 9 && second.length > 9) {
-        first.length = 9;
-        second.length = 9;
-    } else if (first.length > 9) {
-        first.length = 9;
-    } else if (second.length > 9) {
-        second.length = 9;
+    if (first.length > 11 && second.length > 11) {
+        first.length = 11;
+        second.length = 11;
+    } else if (first.length > 11) {
+        first.length = 11;
+    } else if (second.length > 11) {
+        second.length = 11;
     }
 }
