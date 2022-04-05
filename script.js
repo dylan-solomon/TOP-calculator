@@ -41,21 +41,31 @@ for (let num in nums) {
             localeNumber = Number(second.join('')).toLocaleString('en-US');
             output.textContent = localeNumber;
         };
+        if(first.length>0){
+            reset.textContent = 'C';
+        }
     });
 }
 
 for (let ops in operators) {
     operators[ops].addEventListener('click', () => {
+        operation.length = 0;
         operation.push(operators[ops].textContent);
         output.textContent = operation;
     })
 }
 
+
 reset.addEventListener('click', () => { 
     output.textContent = 0;
-    first.length = 0;
-    operation.length = 0;
-    second.length = 0;
+    if (second.length>0) {
+        second.length = 0;
+    } else {
+        first.length = 0;
+        reset.textContent = 'AC'
+        operation.length = 0;
+        second.length = 0;
+    };
 })
 
 percentage.addEventListener('click', () => {
@@ -85,7 +95,6 @@ function multiply(a,b){
         second.length = 0;
         first.length = 0;
         first.push('result');
-        operation.length = 0;
         output.textContent = result;
     };
 }
@@ -96,7 +105,6 @@ function subtract(a,b){
         second.length = 0;
         first.length = 0;
         first.push(result);
-        operation.length = 0;
         output.textContent = result;
     };
 }
@@ -107,7 +115,6 @@ function divide(a,b){
         second.length = 0;
         first.length = 0;
         first.push(result)
-        operation.length = 0;
         output.textContent = result;
     };
 }
@@ -117,7 +124,6 @@ function add(a,b){
         let result = Number(a.join('')) + Number(b.join(''));
         second.length = 0;
         first.length = 0;
-        operation.length = 0;
         first.push(result);
         output.textContent = result;
     };
