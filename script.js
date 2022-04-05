@@ -94,7 +94,7 @@ decimal.addEventListener('click', () => {
         sizeLimit(first.push(decimal.textContent));
         localeNumber = first.join('').toLocaleString('en-US', myLocale);
         output.textContent = localeNumber;
-    } else if (first.length> 0 && second.length == 0) {
+    } else if (operation.length> 0 && second.length == 0) {
         second.push(decimal.textContent);
         output.textContent = `0` + `${decimal.textContent}`;
     } else if (second.length > 0 && !second.includes('.')) {
